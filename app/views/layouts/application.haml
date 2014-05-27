@@ -16,17 +16,20 @@
         = drop_down "Aukcje" do 
           = menu_item "Przedmioty", root_path
           = menu_item "Moje przedmioty", ""
-        - if current_user
-          = menu_item "Wyloguj", log_out_path
+        - if user_signed_in?
+          = menu_item "Wyloguj", destroy_user_session_path, method: :delete
         - else
-      = menu_group do
-        = drop_down "Konto" do
-          = drop_down_divider
-          = simple_form_for :user, url: session_path(:user), class: "navbar-form" do |f|
-            = f.text_field :email
-            = f.password_field :password
-            = f.submit
-          = menu_item "Zarejestruj się", root_path
+          = menu_group do
+            = drop_down "Konto" do
+              = drop_down_divider
+              = simple_form_for :user, url: session_path(:user), class: "navbar-form" do |f|
+                = f.text_field :email
+                = f.password_field :password
+                = f.submit "Zaloguj się"
+              = menu_item "Zarejestruj się", new_user_registration_path
+      - if user_signed_in?
+        = menu_group do
+          = menu_text "Witaj #{current_user.email}!"
 
     %div.container-fluid
       %div.span2.col-md-2 
