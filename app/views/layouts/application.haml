@@ -1,0 +1,38 @@
+%html
+  %head
+    %title Give Your Shit Away
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body 
+    = nav_bar responsive: true, brand: "Oddaj Swoje Gówno", brand_link: root_path do
+      = menu_group do
+        = menu_divider
+        = menu_item "Link", root_path
+        = menu_item "Link2", "/elaela"
+        = menu_divider
+      = menu_group do
+        = drop_down "Aukcje" do 
+          = menu_item "Przedmioty", root_path
+          = menu_item "Moje przedmioty", ""
+        - if current_user
+          = menu_item "Wyloguj", log_out_path
+        - else
+      = menu_group do
+        = drop_down "Konto" do
+          = drop_down_divider
+          = simple_form_for :user, url: session_path(:user), class: "navbar-form" do |f|
+            = f.text_field :email
+            = f.password_field :password
+            = f.submit
+          = menu_item "Zarejestruj się", root_path
+
+    %div.container-fluid
+      %div.span2.col-md-2 
+        - categories.each do |category|
+          = link_to category.name, root_path, params: { category: category.name }
+          %br
+
+      %div.span10.col-md-10
+        = yield

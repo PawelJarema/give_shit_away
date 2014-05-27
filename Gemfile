@@ -26,7 +26,10 @@ gem 'haml'
 
 # non standard gems
 # devise, bootstrat, pictures on heroku, text icons, searchlight
-gem 'twitter-bootstrap-rails', git: 'https://github.com/seyhunak/twitter-bootstrap-rails'
+gem 'simple_form'
+gem 'decent_exposure'
+
+gem 'bootstrap-sass', '< 3.0'
 
 gem 'devise', git: 'https://github.com/plataformatec/devise'
 gem 'paperclip', git: 'https://github.com/thoughtbot/paperclip'
