@@ -1,0 +1,16 @@
+= simple_form_for new_item, url: items_path, method: :post do |f|
+  = f.label "Tytuł"
+  = f.text_field :title
+  = f.label "Kategoria"
+  = f.select :category_name, category_names
+  = f.label "Stan Przedmiotu"
+  = f.select :state, stan_przedmiotu
+  = f.label "Cena"
+  = f.text_field :price, as: :float
+  = f.label "Opis"
+  = f.text_area :description
+  = f.label "Zdjęcie"
+  = f.file_field :photo
+  %br
+  = f.submit "Zapisz"
+

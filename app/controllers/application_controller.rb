@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   expose(:categories) { prepare_categories }
+  expose(:category_names) { category_names }
+  expose(:stan_przedmiotu) { items_state }
 
   def setup_global_variables
   end
@@ -15,10 +17,18 @@ class ApplicationController < ActionController::Base
 	end
 
 	def seed_categories
-      categories = ['Ubrania', 'Gadżety', 'Płyty CD', 'Gry', 'Obuwie', 'Ozdoby', 'Sprzęt', 'Książki', 'Przybory Szkolne'].sort!
+      categories = category_names
       categories.each do |category|
       	Category.new(name: category).save!
       end
-      Categories.all
-    end
+      Category.all
+  end
+
+  def category_names
+    categories = ['Ubrania', 'Gadżety', 'Płyty CD', 'Gry', 'Obuwie', 'Ozdoby', 'Sprzęt', 'Książki', 'Przybory Szkolne'].sort!
+  end
+
+  def items_state
+    ['Nowy', 'Bardzo Dobry', 'Dobry', 'Nieuszkodzony', 'Lekkie zużycie', 'Zepsuty']
+  end
 end

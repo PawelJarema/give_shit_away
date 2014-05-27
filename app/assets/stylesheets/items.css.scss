@@ -1,3 +1,25 @@
 // Place all the styles related to the items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#new {
+	background: image-url('plus.png') no-repeat center;
+	background-color: #eee;
+	border: 6px dashed #000;
+	border-radius: 10px;
+
+	transition: all 1s ease-in-out;
+	opacity: .3;
+}
+
+#new:hover {
+	transition: all 1s ease-in-out;
+	opacity: 1;
+}
+
+.item {
+	margin: 10px;
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+}
