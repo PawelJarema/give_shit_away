@@ -1,0 +1,10 @@
+%h1 Conversations#Inbox
+%p view all conversations here
+
+%div.my_propositions
+  - wants_to_sell.each do |conversation|
+    = "Rozmawiam z #{ conversation.buyer.email } w sprawie #{ conversation.item.title }"
+
+%div.my_inquiries
+  - wants_to_buy.each do |conversation|
+    = "Chcę kupić #{ conversation.item.title } od #{ conversation.seller.email }"

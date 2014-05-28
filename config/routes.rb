@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'conversations/inbox'
+  
   get 'conversations/index'
 
   get 'conversations/new'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528061955) do
+ActiveRecord::Schema.define(version: 20140528101452) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140528061955) do
     t.integer  "conversation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "seen"
   end
 
   create_table "users", force: true do |t|

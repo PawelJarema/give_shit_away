@@ -30,6 +30,9 @@
               = menu_item "Zarejestruj się", new_user_registration_path
       - if user_signed_in?
         = menu_group do
+          = link_to "/conversations/inbox" do
+            %div.inbox
+        = menu_group do
           = menu_text "Witaj #{current_user.email}!"
 
     - if flash[:notice] 

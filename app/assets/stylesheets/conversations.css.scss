@@ -2,6 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.inbox 
+{
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+
+	background: image_url('mail.png') no-repeat center bottom;
+	background-size: 30px 30px;
+
+
+	transition: all 1s ease-in-out;
+	opacity: 0.3;
+}
+
+.inbox:hover {
+	transition: all 1s ease-in-out;
+	opacity: 1;
+}
+
 .messages, .item_data {
 	display: inline-block !important;
 }

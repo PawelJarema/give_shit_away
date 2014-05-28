@@ -1,5 +1,7 @@
 class ConversationsController < ApplicationController
   expose(:conversation) { get_conversation }
+  expose(:wants_to_buy) { current_user.wants_to_buy }
+  expose(:wants_to_sell) { current_user.wants_to_sell }
   
   expose(:new_message) { Message.new }
   expose(:messages) { conversation.messages } #.any? ? conversation.messages : {} }
@@ -9,6 +11,9 @@ class ConversationsController < ApplicationController
   expose(:buyer_id) { session[:buyer_id] }
   expose(:seller_id) { session[:seller_id] }
   expose(:item_id) { session[:item_id] }
+
+  def inbox
+  end
 
   def index
   end
@@ -23,6 +28,8 @@ class ConversationsController < ApplicationController
   	session[:buyer_id] = current_user.id
   	session[:seller_id] = params[:item_user_id]
   	session[:item_id] = params[:item_id]
+
+    mark_all_messages_as_seen unless conversation.new_record?
   end
 
   def create
@@ -49,23 +56,30 @@ class ConversationsController < ApplicationController
     	params.permit(:item_user_id, :item_id)
     end
 
-  	def get_conversation
+    def get_conversation
       conversation = Conversation.where(buyer_id: current_user.id, seller_id: seller_id, item_id: item_id).last
-	  
-	  unless conversation
-	    conversation = Conversation.new 
-	  	conversation.buyer_id = buyer_id
-	  	conversation.seller_id = seller_id
-	  	conversation.item_id = item_id
-	  end
+  	  
+  	  unless conversation
+  	    conversation = Conversation.new 
+  	  	conversation.buyer_id = buyer_id
+  	  	conversation.seller_id = seller_id
+  	  	conversation.item_id = item_id
+  	  end
 
-	  session[:conversation_id] = conversation.id
+  	  session[:conversation_id] = conversation.id
 
-	  conversation
-	end
+  	  conversation
+  	end
 
-	def get_new_message
-		params.require(:new_message).permit(:body)
-	end
+  	def get_new_message
+  		params.require(:new_message).permit(:body)
+  	end
+
+    def mark_all_messages_as_seen
+      all_messages = conversation.messages.all.where('user_id != ?', current_user.id )
+      all_messages.each do |msg|
+        #msg.update(seen: true)
+      end
+    end
 
 end

@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :items
-  has_many :conversations
+  has_many :wants_to_buy, class_name: 'Conversation', foreign_key: :buyer_id
+  has_many :wants_to_sell, class_name: 'Conversation', foreign_key: :seller_id
   has_many :messages
   
 end
