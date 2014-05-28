@@ -22,4 +22,69 @@
 	display: inline-block;
 	width: 200px;
 	height: 200px;
+
+	overflow: hidden;
+	position: relative;
+
+	border-radius: 15px;
+	/*background: #eee;*/
+	text-align: center;
+	line-height: 200px;
+
+	img {
+		vertical-align: middle;
+		max-height: 200px;
+		max-width: 200px;
+	}
+}
+
+.item-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  opacity: .4;
+
+  height: 25%;
+  width: 100%;
+
+  text-align: center;
+
+  color: #000;
+  background: #eee;
+
+  margin: 0;
+}
+
+.like {
+	width: 26px;
+	height: 26px;
+	background: #fff image-url('heart.png') no-repeat center 5px;
+	background-size: 18px 18px;
+
+	border-radius: 15px;
+
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+
+	transition: all 0.5s ease-in-out;
+	opacity: .7;
+}
+
+.like:hover {
+	transition: all 0.5s ease-in-out;
+	opacity: 1;
+
+	cursor: pointer;
+}
+
+.like-green {
+	background: rgb(70, 136, 71) image-url('heart.png') no-repeat center 5px;
+	background-size: 18px 18px;
+
+	opacity: 1 !important;
+}
+.like-green:hover {
+	cursor: none !important;
 }

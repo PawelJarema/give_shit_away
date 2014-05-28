@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   expose(:conversation) { get_conversation }
-  expose(:wants_to_buy) { current_user.wants_to_buy }
-  expose(:wants_to_sell) { current_user.wants_to_sell }
+  expose(:wants_to_buy) { current_user.wants_to_buy.open }
+  expose(:wants_to_sell) { current_user.wants_to_sell.open }
   
   expose(:new_message) { Message.new }
   expose(:messages) { conversation.messages } #.any? ? conversation.messages : {} }

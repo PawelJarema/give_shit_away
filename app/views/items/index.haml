@@ -7,6 +7,11 @@
 
 - items.each do |item|
   - if user_signed_in? and item.user != current_user
-    = link_to "conversations/new?item_id=#{item.id}&item_user_id=#{item.user.id}" do
-      %div.item
+    %div.item
+      = link_to "/conversations/new?item_id=#{item.id}&item_user_id=#{item.user.id}" do
         = draw_item item
+      - if item.has_vote_from? current_user
+        %div.like.like-green
+      - else
+        = link_to "/items/like?item_id=#{item.id}", method: :post do
+          %div.like{ id: item.id }

@@ -2,6 +2,13 @@ class ItemsController < ApplicationController
   expose(:items) { search_for_items }
   expose(:new_item) { get_item }
 
+  def like
+    unless Item.find(params[:item_id]).has_vote_from? current_user
+      like = Like.create!(user_id: current_user.id, item_id: params[:item_id])
+    end
+    render :index
+  end
+
   def index
   end
 
@@ -44,7 +51,14 @@ class ItemsController < ApplicationController
   private 
 
     def search_for_items
-      Item.all
+      if search_params != nil
+        title = search_params[:query]
+        search = ItemSearch.new(title: title, category: params[:category]).results  + ItemSearch.new(description: title, category: params[:category]).results
+      else
+        search = Item.where(category: params[:category])
+      end
+
+      search
     end 
 
     def get_item
@@ -56,6 +70,10 @@ class ItemsController < ApplicationController
       p = params.require(:item).permit(:title, :category_name, :state, :price, :description, :photo)
       p[:price] = p[:price].to_f
       p
+    end
+
+    def search_params
+      params.require(:search).permit(:query) if params[:search]
     end
 
 end

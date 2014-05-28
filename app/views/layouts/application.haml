@@ -16,6 +16,10 @@
         = drop_down "Aukcje" do 
           = menu_item "Przedmioty", root_path
           = menu_item "Moje przedmioty", ""
+        = menu_group do
+          = simple_form_for :search, url: items_path, method: :get, class: "navbar-form" do |f|
+            = f.text_field :query, class: "form-control", placeholder: "Search"
+            = f.submit "Szukaj", class: "btn btn-default"
         - if user_signed_in?
           = menu_item "Wyloguj", destroy_user_session_path, method: :delete
         - else
@@ -32,6 +36,7 @@
         = menu_group do
           = link_to "/conversations/inbox" do
             %div.inbox
+            = "#{current_user.new_conversation_count(current_user)}"
         = menu_group do
           = menu_text "Witaj #{current_user.email}!"
 
@@ -45,7 +50,7 @@
     %div.container-fluid
       %div.span2.col-md-2 
         - categories.each do |category|
-          = link_to category.name, root_path, params: { category: category.name }
+          = link_to category.name, items_path(category: category.name) 
           %br
 
       %div

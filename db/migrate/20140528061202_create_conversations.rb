@@ -2,7 +2,7 @@ class CreateConversations < ActiveRecord::Migration
   def change
     create_table :conversations do |t|
       t.boolean :item_sent
-      t.boolean :concluded
+      t.boolean :concluded, default: false
 
       # adding indexes
       t.integer :seller_id
