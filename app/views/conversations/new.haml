@@ -1,0 +1,12 @@
+%h1 Conversation#New
+%p start or view an open conversation
+
+- messages.each do |message|
+  %div.message
+    = message.body
+
+= simple_form_for :new_message, url: "/conversations/create", method: :post do |f|
+  = f.text_area :body, class: "new_message"
+  %br
+  = f.submit "Wyślij wiadomość"
+  

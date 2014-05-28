@@ -6,10 +6,7 @@
     %div.item#new
 
 - items.each do |item|
-  - if item.user == current_user
-    = link_to edit_item_path(item) do
+  - if user_signed_in? and item.user != current_user
+    = link_to "conversations/new?item_id=#{item.id}&item_user_id=#{item.user.id}" do
       %div.item
-        = image_tag item.photo.url(:medium)
-        = item.title
-  - else
-    %div
+        = draw_item item

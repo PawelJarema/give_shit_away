@@ -6,4 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :items
+  has_many :conversations
+  has_many :messages
+  
 end

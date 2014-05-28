@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'conversations/index'
+
+  get 'conversations/new'
+  
+  post 'conversations/create'
+
+  post 'conversations/close'
+
+  get 'conversations/destroy'
+
   devise_for :users
   resources :items
 
