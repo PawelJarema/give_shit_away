@@ -1,7 +1,11 @@
 class ConversationsController < ApplicationController
   expose(:conversation) { get_conversation }
+  
   expose(:new_message) { Message.new }
   expose(:messages) { conversation.messages } #.any? ? conversation.messages : {} }
+  
+  expose(:item) { Item.find(item_id) }
+
   expose(:buyer_id) { session[:buyer_id] }
   expose(:seller_id) { session[:seller_id] }
   expose(:item_id) { session[:item_id] }

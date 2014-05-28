@@ -1,3 +1,18 @@
 // Place all the styles related to the conversations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.messages, .item_data {
+	display: inline-block !important;
+}
+
+.messages {
+	float: left !important;
+	width: 70%;
+}
+
+.item_data {
+	float: left;
+	width: 20%;
+	text-align: center;
+}
