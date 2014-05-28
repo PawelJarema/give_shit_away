@@ -6,6 +6,10 @@
     %div.item#new
 
 - items.each do |item|
-  %div.item
-    = image_tag item.photo.url(:medium)
-    = item.title
+  - if item.user == current_user
+    = link_to edit_item_path(item) do
+      %div.item
+        = image_tag item.photo.url(:medium)
+        = item.title
+  - else
+    %div

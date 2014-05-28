@@ -21,15 +21,23 @@
         - else
           = menu_group do
             = drop_down "Konto" do
-              = drop_down_divider
+              %li Zaloguj się
               = simple_form_for :user, url: session_path(:user), class: "navbar-form" do |f|
                 = f.text_field :email
                 = f.password_field :password
                 = f.submit "Zaloguj się"
+              = drop_down_divider
               = menu_item "Zarejestruj się", new_user_registration_path
       - if user_signed_in?
         = menu_group do
           = menu_text "Witaj #{current_user.email}!"
+
+    - if flash[:notice] 
+      %div.alert.alert-success
+        = flash[:notice]
+    - if flash[:error]
+      %div.alert.alert-danger
+        = flash[:error]
 
     %div.container-fluid
       %div.span2.col-md-2 
