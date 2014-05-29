@@ -1,4 +1,9 @@
 class ConversationsController < ApplicationController
+
+  expose(:buyer_id) { session[:buyer_id] }
+  expose(:seller_id) { session[:seller_id] }
+  expose(:item_id) { session[:item_id] }
+
   expose(:conversation) { get_conversation }
   expose(:wants_to_buy) { current_user.wants_to_buy.open }
   expose(:wants_to_sell) { current_user.wants_to_sell.open }
@@ -7,10 +12,6 @@ class ConversationsController < ApplicationController
   expose(:messages) { conversation.messages } #.any? ? conversation.messages : {} }
   
   expose(:item) { Item.find(item_id) }
-
-  expose(:buyer_id) { session[:buyer_id] }
-  expose(:seller_id) { session[:seller_id] }
-  expose(:item_id) { session[:item_id] }
 
   def inbox
   end
@@ -25,9 +26,9 @@ class ConversationsController < ApplicationController
   # parametry rozpozanwcze current_user, item_user_id, item_id
 
   def new
-  	session[:buyer_id] = current_user.id
-  	session[:seller_id] = params[:item_user_id]
-  	session[:item_id] = params[:item_id]
+    session[:buyer_id] = params[:buyer_id]
+    session[:seller_id] = params[:seller_id]
+    session[:item_id] = params[:item_id]
 
     mark_all_messages_as_seen unless conversation.new_record?
   end
@@ -36,7 +37,7 @@ class ConversationsController < ApplicationController
   	conversation.save if conversation.new_record?
 
   	new_message = Message.new(get_new_message)
-  	new_message.user_id = buyer_id
+  	new_message.user_id = current_user.id
   	new_message.conversation_id = conversation.id
 
   	new_message.save!
@@ -57,7 +58,7 @@ class ConversationsController < ApplicationController
     end
 
     def get_conversation
-      conversation = Conversation.where(buyer_id: current_user.id, seller_id: seller_id, item_id: item_id).last
+      conversation = Conversation.where(buyer_id: buyer_id, seller_id: seller_id, item_id: item_id).last
   	  
   	  unless conversation
   	    conversation = Conversation.new 
@@ -78,7 +79,7 @@ class ConversationsController < ApplicationController
     def mark_all_messages_as_seen
       all_messages = conversation.messages.all.where('user_id != ?', current_user.id )
       all_messages.each do |msg|
-        #msg.update(seen: true)
+        msg.update(seen: true)
       end
     end
 

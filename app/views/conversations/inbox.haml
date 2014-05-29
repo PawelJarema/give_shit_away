@@ -1,10 +1,18 @@
 %h1 Conversations#Inbox
 %p view all conversations here
 
+%h2 Użytkownicy, którzy są zainteresowani moimi przedmiotami
 %div.my_propositions
   - wants_to_sell.each do |conversation|
-    = "Rozmawiam z #{ conversation.buyer.email } w sprawie #{ conversation.item.title }"
+    = link_to "/conversations/new?item_id=#{ conversation.item.id }&seller_id=#{ current_user.id }&buyer_id=#{ conversation.buyer.id }" do
+      = "Rozmawiam z #{ conversation.buyer.email } w sprawie #{ conversation.item.title }"
+      = if conversation.is_new? current_user
+        = image_tag "bell.png", class: "new_conversation"
 
+%h2 Przedmioty, które chcę zamówić
 %div.my_inquiries
   - wants_to_buy.each do |conversation|
-    = "Chcę kupić #{ conversation.item.title } od #{ conversation.seller.email }"
+    = link_to "/conversations/new?item_id=#{ conversation.item.id }&seller_id=#{ conversation.seller.id }&buyer_id=#{ current_user.id }" do
+      = "Chcę kupić #{ conversation.item.title } od #{ conversation.seller.email }"
+      = if conversation.is_new? current_user
+        = image_tag "bell.png", class: "new_conversation"

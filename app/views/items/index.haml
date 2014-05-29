@@ -1,14 +1,14 @@
 %h1 Items#index
 %p Find me in app/views/items/index.html.erb
 
-- if user_signed_in?
+- if user_signed_in? and !current_user.does_not_validate
   = link_to new_item_path, method: :get do
     %div.item#new
 
 - items.each do |item|
   - if user_signed_in? and item.user != current_user
     %div.item
-      = link_to "/conversations/new?item_id=#{item.id}&item_user_id=#{item.user.id}" do
+      = link_to "/conversations/new?item_id=#{ item.id }&ibuyer_id=#{ item.user.id }&seller_id=#{ current_user.id }" do
         = draw_item item
       - if item.has_vote_from? current_user
         %div.like.like-green
