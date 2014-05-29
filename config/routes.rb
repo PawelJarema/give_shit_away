@@ -1,25 +1,21 @@
 Rails.application.routes.draw do
 
   get 'conversations/inbox'
-  
   get 'conversations/index'
-
   get 'conversations/new'
-  
   post 'conversations/create'
-
   post 'conversations/close'
-
   get 'conversations/destroy'
 
   devise_for :users
+  get 'users/update_account_information'
+  post 'users/update'
+
   resources :items
+  get 'items/index'
+  post 'items/like'
 
   root to: 'items#index'
-  
-  get 'items/index'
-  
-  post 'items/like'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

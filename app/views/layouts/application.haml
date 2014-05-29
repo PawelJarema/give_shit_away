@@ -46,6 +46,10 @@
     - if flash[:error]
       %div.alert.alert-danger
         = flash[:error]
+    - if user_signed_in? and current_user.does_not_validate
+      %div.alert.alert-warning
+        = link_to users_update_account_information_path(current_user) do
+          = globals_update_account_information_message
 
     %div.container-fluid
       %div.span2.col-md-2 

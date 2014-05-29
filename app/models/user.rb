@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  require 'devise'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,6 +23,11 @@ class User < ActiveRecord::Base
 
   	result = "" if result < 1;
   	result
+  end
+
+  def does_not_validate
+    validates = name and surname and street and flat and number and postal and city and strate and country
+    not validates
   end
 
 end

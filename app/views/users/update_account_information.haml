@@ -1,0 +1,27 @@
+%h1 Users#Update account information
+%p update account details
+
+= simple_form_for :user, url: users_update_path, method: :post do |f|
+  = field_set_tag 'Użytkownik' do
+    = f.label "Imię"
+    = f.text_field :name
+    = f.label "Nazwisko"
+    = f.text_field :surname
+  = field_set_tag 'Adres' do
+    = f.label "Ulica"
+    = f.text_field :street
+    = f.label "Numer domu i klatki schodowej"
+    = f.text_field :flat
+    = f.label "Numer mieszkania"
+    = f.text_field :number
+  = field_set_tag 'Lokalizacja' do
+    = f.label "Kod pocztowy"
+    = f.text_field :postal
+    = f.label "Miasto"
+    = f.select :city, cities
+    = f.label "Województwo"
+    = f.select :strate, strates
+    = f.label "Kraj"
+    = f.select :country, countries
+  %br
+  = f.submit "Zapisz"
