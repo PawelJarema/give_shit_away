@@ -37,7 +37,7 @@ class ConversationsController < ApplicationController
   	conversation.save if conversation.new_record?
 
   	new_message = Message.new(get_new_message)
-  	new_message.user_id = current_user.id
+  	new_message.user_id = current_user.id # role independent (buyer/seller determined by conversation fields)
   	new_message.conversation_id = conversation.id
 
   	new_message.save!

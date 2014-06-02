@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   expose(:stan_przedmiotu) { items_state }
 
   # global variables
-  expose(:globals_update_account_information_message) { "Na razie twoje konto nie zawiera wszystkich informacji potrzebnych aby dodawać, wysyłać i zamawiać przedmioty. Kliknij tu aby poprawnie skonfigurować konto." }
+  expose(:globals_update_account_information_message) { "Na razie twoje konto nie zawiera wszystkich informacji potrzebnych by dodawać, wysyłać i zamawiać przedmioty. Kliknij tu aby poprawnie skonfigurować konto." }
   expose(:cities) { ["Gdańsk", "Poznań", "Warszawa"] }
   expose(:strates) { ["Dolnośląskie", "Kujawsko-pomorskie", "Lubelskie", "Lubuskie", "Łódzkie", "Małopolskie", "Mazowieckie", "Opolskie", "Podkarpackie", "Podlaskie", "Pomorskie", "Śląskie", "Świętokrzyskie", "Warmińsko-mazurskie", "Wielkopolskie", "Zachodniopomorskie"] }
   expose(:countries) { ["Polska"] }

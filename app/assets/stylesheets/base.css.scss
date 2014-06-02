@@ -1,0 +1,40 @@
+html, body {
+	height: 100%;
+}
+
+.navbar-inner {
+	padding-right: 200px;
+}
+/* space */
+
+.full-height-row {
+	width: 100%;
+	height: 100%;
+	display: table-row;
+}
+
+.col-md-3, .col-md-11 {
+	display: table-cell;
+	float: none;
+}
+
+.padding_left {
+	padding-left: 20px !important;
+	padding-right: 15px;
+}
+
+.menu_padding {
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+
+}
+
+.menu_shade {
+	color: rgb(181, 181, 181);
+}
+
+/* styling alerts */
+
+.alert {
+	text-align: center;
+}
